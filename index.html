@@ -172,8 +172,6 @@
 </head>
 <body>
 
-<!-- Add the Font Awesome CDN link in your <head> section -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <header class="header">
         <div class="logo">
@@ -214,7 +212,7 @@
         </div>
         <div class="toggle">
             <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
-            <span class="dropdown-toggle">▶</span>
+            <span class="dropdown-toggle"><i class="fa-solid fa-plus"></i></span>
             <div class="mobile-dropdown">
                 <a href="#vision"><i class="fas fa-eye"></i> Vision</a>
                 <a href="#vision"><i class="fas fa-bullseye"></i> Mission</a>
@@ -223,7 +221,7 @@
         </div>
         <div class="toggle">
             <a href="#"><i class="fas fa-cogs"></i> Our Offerings</a>
-            <span class="dropdown-toggle">▶</span>
+            <span class="dropdown-toggle"><i class="fa-solid fa-plus"></i></span>
             <div class="mobile-dropdown">
                 <a href="#valueproposition"><i class="fas fa-gift"></i> Value Proposition</a>
                 <a href="#Why us"><i class="fas fa-question-circle"></i> Why Us</a>
@@ -310,52 +308,60 @@
 .nav a i {
     margin-right: 10px; /* Increased space between icon and text */
 }
+.mobile-nav {
+    display: none; /* Hide by default */
+    flex-direction: column;
+    background-color: black;
+    padding: 20px;
+}
 
+.mobile-dropdown {
+    display: none; /* Submenus are also hidden by default */
+    flex-direction: column;
+    padding-left: 20px;
+}
 
 </style> 
 
 
 <script>
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
 hamburger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-    hamburger.classList.toggle('active');
+    const isActive = hamburger.classList.toggle('active');
+    mobileNav.style.display = isActive ? 'flex' : 'none'; 
 });
 
-    // Toggle mobile navigation menu
-    hamburger.addEventListener('click', () => {
-        const isActive = hamburger.classList.toggle('active');
-        mobileNav.style.display = isActive ? 'flex' : 'none';
-    });
+dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+        const dropdown = toggle.nextElementSibling; 
+        const icon = toggle.querySelector('i'); 
+        const isOpen = dropdown.style.display === 'flex'; 
 
-    // Toggle individual dropdowns
-    dropdownToggles.forEach(toggle => {
-        toggle.addEventListener('click', (e) => {
-            const dropdown = e.target.nextElementSibling;
-            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-            e.target.classList.toggle('open');
-        });
+        dropdown.style.display = isOpen ? 'none' : 'flex';
+
+        icon.className = isOpen ? 'fa-solid fa-plus' : 'fa-solid fa-xmark';
     });
+});
+
 </script>
 <section id="home">
     <style>
-       /* Body and HTML styles */
+      
 body, html {
   height: 100%;
-  margin: 0;  /* Reset margin */
-  padding: 0; /* Reset padding */
+  margin: 0; 
+  padding: 0; 
   font-family: Arial, sans-serif;
   
 }
 
-/* Header Styles */
 nav {
   display: flex;
   gap: 15px;
-  padding: 10px; /* Add padding for spacing */
+  padding: 10px; 
 }
 
 nav a {
@@ -368,29 +374,25 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Slideshow Styles */
 .slideshow-container {
-  margin-top: 70px; /* Adjust the top margin for header space */
+  margin-top: 70px; 
   max-width: 100%;
   position: relative;
   overflow: hidden;
   margin-top: -15px;
 }
 
-/* Hide slides by default */
 .mySlides {
   display: none;
   position: relative;
 }
 
-/* Make sure images are responsive */
 img {
   width: 100%;
   height: auto;
   object-fit: contain;
 }
 
-/* Text Overlay for the slideshow */
 .text-container {
   position: absolute;
   bottom: 0;
@@ -416,7 +418,6 @@ img {
   line-height: 1.5;
 }
 
-/* Navigation Arrows */
 .prev, .next {
   cursor: pointer;
   position: absolute;
@@ -442,7 +443,6 @@ img {
   color: black;
 }
 
-/* Navigation dots */
 .dot {
   cursor: pointer;
   height: 15px;
@@ -458,7 +458,6 @@ img {
   background-color: #000000;
 }
 
-/* Media Queries for Responsiveness */
 @media screen and (min-width: 768px) {
   img {
     height: 100vh; /* Full viewport height for larger screens */
@@ -573,7 +572,7 @@ setInterval(showSlides, 8500);
       <h2 class="flash-card-title w3-xlarge w3-bottombar w3-border-gold w3-padding-16" 
           style="font-size: 12px;" >
           Yet Another Networking Club
-      </h2> <!-- Font size set to 16px by default, nowrap for one line -->
+      </h2> 
       
       <p class="w3-justify">Networking and life skills are crucial in today's fast-paced world. 
         Networking helps you connect with diverse individuals, opening doors to job opportunities, partnerships, and mentorships. It fosters knowledge sharing and skill development,
@@ -587,17 +586,16 @@ setInterval(showSlides, 8500);
       color: #000000 !important;
     }
     @media (max-width: 768px) {
-      /* For smaller screens */
       #about h2 {
         font-size: 14px;
-        color:#f5f1f1 /* Reduced font-size on smaller screens */
+        color:#f5f1f1 
       }
     }
   
     @media (max-width: 480px) {
-      /* For very small screens (like mobile phones in portrait mode) */
+     
       #about h2 {
-        font-size: 12px; /* Further reduced font-size */
+        font-size: 12px; 
       }
     }
    
@@ -605,13 +603,11 @@ setInterval(showSlides, 8500);
 </section>
 <section id="vision">
     <style>
-      /* Vision Section Container */
       .vision-container {
         text-align: center;
         padding: 64px 16px;
       }
   
-      /* Section Title */
       .vision-title {
         font-size: 2.5em;
         color: #000;
@@ -620,7 +616,6 @@ setInterval(showSlides, 8500);
         letter-spacing: 2px;
       }
   
-      /* Grid Layout for Vision & Mission Cards */
       .vision-grid {
         margin-top:20px;
         display: flex;
@@ -630,7 +625,6 @@ setInterval(showSlides, 8500);
         flex-wrap: wrap;
       }
   
-      /* Vision & Mission Cards */
       .vision-card {
         background: #ffffff !important;
         border-radius: 10px;
@@ -647,28 +641,25 @@ setInterval(showSlides, 8500);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
   
-      /* Icon Styling */
       .vision-icon {
         font-size: 3em;
-        color: #000; /* Black color for icons */
+        color: #000; 
         margin-bottom: 15px;
-        animation: pulse 1.5s infinite; /* Pulse animation */
+        animation: pulse 1.5s infinite; 
       }
 
-      /* Pulse Animation */
       @keyframes pulse {
         0% {
-          transform: scale(1); /* Normal size */
+          transform: scale(1);
         }
         50% {
-          transform: scale(1.2); /* Slightly bigger */
+          transform: scale(1.2); 
         }
         100% {
-          transform: scale(1); /* Back to normal size */
+          transform: scale(1); 
         }
       }
   
-      /* Text Content */
       .vision-card h3 {
         font-size: 1.7em;
         margin: 15px 0 10px;
@@ -681,35 +672,31 @@ setInterval(showSlides, 8500);
         line-height: 1.5;
       }
   
-      /* Responsive Design for Small Screens */
       @media (max-width: 768px) {
         .vision-grid {
-          flex-direction: column; /* Stacks cards vertically */
-          gap: 20px; /* Spacing between cards */
+          flex-direction: column; 
+          gap: 20px; 
         }
   
         .vision-card {
-          width: 100%; /* Full width on small screens */
+          width: 100%; 
           max-width: 350px;
-          margin: 0 auto; /* Center-align cards */
+          margin: 0 auto; 
         }
       }
       
     </style>
   
-    <!-- Vision Section -->
     <div class="vision-container">
         <h2 class="flash-card-title w3-xlarge w3-bottombar w3-border-gold w3-padding-16" 
         style="font-size: 12px;" >
 Our Purpose    </h2>      <div class="vision-grid">
-        <!-- Vision Card -->
         <div class="vision-card">
           <i class="fas fa-eye vision-icon"></i>
           <h3>Vision</h3>
           <p>Empowering young minds together</p>
         </div>
   
-        <!-- Mission Card -->
         <div class="vision-card">
           <i class="fas fa-rocket vision-icon"></i>
           <h3>Mission</h3>
@@ -718,7 +705,6 @@ Our Purpose    </h2>      <div class="vision-grid">
       </div>
     </div>
   
-    <!-- Font Awesome Script -->
     <script
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
@@ -726,30 +712,27 @@ Our Purpose    </h2>      <div class="vision-grid">
 </section>
 <section id="corevalues">
     <style>
-        /* Container for all flash cards */
         .flash-card-container {
             text-align: center;
             padding: 20px;
         }
   
-        /* Header section */
         .flash-card-header {
             margin-bottom: 20px;
         }
   
         .flash-card-title {
             font-size: 2.5em;
-            color: #000000; /* Black color for the title */
+            color: #000000; 
             text-transform: uppercase;
             letter-spacing: 2px;
         }
   
         .flash-card-title .w3-bottombar {
-            border-color: #000000; /* Black bottom bar */
+            border-color: #000000; 
             border-width: 4px;
         }
   
-        /* Flash card grid */
         .flash-card-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -757,23 +740,20 @@ Our Purpose    </h2>      <div class="vision-grid">
             margin: 20px auto;
         }
   
-        /* Media query for smaller screens (max-width: 768px) */
         @media (max-width: 768px) {
             .flash-card-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
   
-        /* Media query for extra small screens (max-width: 480px) */
         @media (max-width: 480px) {
             .flash-card-grid {
                 grid-template-columns: 1fr;
             }
         }
   
-        /* Individual card styling */
        .flash-card {
-      background: #fbfbfb !important; /* Ensures all cards are white */
+      background: #fbfbfb !important;
       color: #000000;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -788,7 +768,6 @@ Our Purpose    </h2>      <div class="vision-grid">
             transform: scale(1.05);
         }
   
-        /* Content inside each card */
         .flash-card-content {
             padding: 20px;
             text-align: center;
@@ -797,29 +776,28 @@ Our Purpose    </h2>      <div class="vision-grid">
         .flash-card h3 {
             font-size: 1.5em;
             margin-bottom: 10px;
-            color: #000000; /* Black heading color */
+            color: #000000; 
         }
   
         .flash-card-icon {
             font-size: 3em;
             margin: 15px 0;
-            color: #000000; /* Black icon color */
+            color: #000000; 
             animation: pulse 2s infinite;
         }
   
         .flash-card p {
             font-size: 1em;
             margin-top: 10px;
-            color: #000000; /* Black paragraph color */
+            color: #000000; 
         }
   
-        /* Animations */
         @keyframes flash {
             0%, 100% {
-                background: #ffffff; /* White */
+                background: #ffffff; 
             }
             50% {
-                background: #f8f8f8; /* Slightly off-white */
+                background: #f8f8f8; 
             }
         }
   
@@ -905,7 +883,6 @@ Our Purpose    </h2>      <div class="vision-grid">
   </section>
   <section id="valueproposition">
     <style>
-        /* Header section */
         .flash-card-header {
             margin-bottom: 20px;
         }
@@ -922,7 +899,6 @@ Our Purpose    </h2>      <div class="vision-grid">
             border-width: 4px;
         }
   
-        /* Flash card grid */
         .flash-card-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -930,21 +906,18 @@ Our Purpose    </h2>      <div class="vision-grid">
             margin: 20px auto;
         }
   
-        /* Media query for smaller screens (max-width: 768px) */
         @media (max-width: 768px) {
             .flash-card-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
   
-        /* Media query for extra small screens (max-width: 480px) */
         @media (max-width: 480px) {
             .flash-card-grid {
                 grid-template-columns: 1fr;
             }
         }
   
-        /* Individual card styling */
        .flash-card {
         background: #ffffff;
         color: #060606;
@@ -960,7 +933,6 @@ Our Purpose    </h2>      <div class="vision-grid">
             transform: scale(1.05);
         }
   
-        /* Content inside each card */
         .flash-card-content {
             padding: 20px;
             text-align: center;
@@ -969,29 +941,28 @@ Our Purpose    </h2>      <div class="vision-grid">
         .flash-card h3 {
             font-size: 1.5em;
             margin-bottom: 10px;
-            color: #040404; /* White heading color */
+            color: #040404; 
         }
   
         .flash-card-icon {
             font-size: 3em;
             margin: 15px 0;
-            color: #080808; /* White icon color */
+            color: #080808; 
             animation: pulse 2s infinite;
         }
   
         .flash-card p {
             font-size: 1em;
             margin-top: 10px;
-            color: #070707; /* White paragraph color */
+            color: #070707; 
         }
   
-        /* Animations */
         @keyframes flash {
             0%, 100% {
-                background: #f7f5f5; /* White */
+                background: #f7f5f5;
             }
             50% {
-                background: #f6f4f4; /* Slightly off-white */
+                background: #f6f4f4; 
             }
         }
   
@@ -1020,7 +991,6 @@ Our Purpose    </h2>      <div class="vision-grid">
                 </div>
             </div>
   
-            <!-- Card 2 -->
             <div class="flash-card">
                 <div class="flash-card-content">
                     <h3>Mentorship Programs</h3>
@@ -1029,7 +999,6 @@ Our Purpose    </h2>      <div class="vision-grid">
                 </div>
             </div>
   
-            <!-- Card 3 -->
             <div class="flash-card">
                 <div class="flash-card-content">
                     <h3>Practical Skill-Building Workshops</h3>
@@ -1040,7 +1009,6 @@ Our Purpose    </h2>      <div class="vision-grid">
         </div>
   
         <div class="flash-card-grid">
-            <!-- Card 4 -->
             <div class="flash-card">
                 <div class="flash-card-content">
                     <h3>Real-World Project Experience</h3>
@@ -1049,7 +1017,7 @@ Our Purpose    </h2>      <div class="vision-grid">
                 </div>
             </div>
   
-            <!-- Card 5 -->
+           
             <div class="flash-card">
                 <div class="flash-card-content">
                     <h3>Financial Literacy</h3>
@@ -1058,7 +1026,6 @@ Our Purpose    </h2>      <div class="vision-grid">
                 </div>
             </div>
   
-            <!-- Card 6 -->
             <div class="flash-card">
                 <div class="flash-card-content">
                     <h3>Building Relationships</h3>
@@ -1071,29 +1038,27 @@ Our Purpose    </h2>      <div class="vision-grid">
   </section>
   <section id="takeaway">
     <style>
-      /* Base Styles */
       .container {
         width: 90%;
         margin: 0 auto;
-        text-align: center; /* Ensures center alignment for text inside the container */
+        text-align: center; 
       }
   
       .flash-card-title {
-        padding-bottom: 8px; /* Reduced space between heading and underline */
+        padding-bottom: 8px; 
       }
   
       .cards-wrapper {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center; /* Center-align cards */
-        gap: 40px; /* Increased gap between cards */
-        padding-bottom: 30px; /* Adjust padding at the bottom */
-        margin-top: 30px; /* Increased space between underline and cards */
+        justify-content: center; 
+        gap: 40px; 
+        padding-bottom: 30px; 
+        margin-top: 30px;
       }
   
-      /* Default Card Styling */
       .card {
-        width: 45%; /* Slightly smaller width for tighter alignment */
+        width: 45%; 
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         overflow: hidden;
@@ -1129,14 +1094,12 @@ Our Purpose    </h2>      <div class="vision-grid">
         opacity: 0.8;
       }
   
-      /* Large Screens - Reduce Card and Image Size */
       @media (min-width: 1200px) {
         .card {
           width: 40%;
         }
       }
   
-      /* Responsive Styles */
       @media (max-width: 768px) {
         .card {
           width: 100%;
@@ -1152,22 +1115,19 @@ Our Purpose    </h2>      <div class="vision-grid">
         }
       }
   
-      /* Extra Small Devices */
       @media (max-width: 480px) {
         .flash-card-title {
-          font-size: 2rem; /* Adjust heading size for small screens */
+          font-size: 2rem;
           padding: 30px 0;
         }
       }
     </style>
   
     <div class="container" id="takeaway-section">
-      <!-- Centered Heading with W3 Bottom Bar -->
       <h2 class="flash-card-title w3-xlarge w3-bottombar w3-border-gold w3-padding-16">
         Your Takeaway
       </h2>
   
-      <!-- Cards Wrapper -->
       <div class="cards-wrapper">
         <div class="card" tabindex="0">
           <img src="images/takeaway1.jpg" alt="Life Skills & Experience">
@@ -1200,7 +1160,7 @@ Our Purpose    </h2>      <div class="vision-grid">
             color: #f3f0f0;
             font-weight: 700;
             margin-bottom: 60px;
-            padding-bottom: 8px; /* Reduced space between heading and underline */
+            padding-bottom: 8px; 
         }
 
         .why-us-wrapper {
@@ -1208,7 +1168,7 @@ Our Purpose    </h2>      <div class="vision-grid">
             justify-content: space-between;
             gap: 30px;
             flex-wrap: wrap;
-            padding: 0 10px; /* Added padding to ensure content isn't too close to the edges */
+            padding: 0 10px; 
         }
 
         .why-us-card {
@@ -1219,8 +1179,8 @@ Our Purpose    </h2>      <div class="vision-grid">
             transition: all 0.3s ease-in-out;
             padding: 40px;
             cursor: pointer;
-            text-align: center; /* Ensures the icon and text are centered */
-            margin-bottom: 20px; /* Space at the bottom of each card */
+            text-align: center; 
+            margin-bottom: 20px; 
         }
 
         .why-us-card:hover {
